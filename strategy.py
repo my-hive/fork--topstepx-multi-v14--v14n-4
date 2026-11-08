@@ -44,11 +44,11 @@ def signals(panel):
             df.low.to_numpy(), df.high.to_numpy(), df.open.to_numpy(), session,
             df.index.as_unit('ns').asi8, df.contract.astype('category').cat.codes.to_numpy(),
             PARAMS['start'], PARAMS['end'],
-            PARAMS['risk'] / (POINT_VALUE[symbol] * PARAMS['size'], PARAMS['side']), PARAMS['size'], PARAMS['side'])
+            PARAMS['risk'] / (POINT_VALUE[symbol] * PARAMS['size']), PARAMS['size'], PARAMS['side'])
     return result
 
 def entry_risk(panel):
-    return {s: np.full(len(d), PARAMS['risk'] / PARAMS['size'], PARAMS['side']) for s, d in panel.items()}
+    return {s: np.full(len(d), PARAMS['risk'] / PARAMS['size']) for s, d in panel.items()}
 
 if __name__ == '__main__':
     import pandas as pd
