@@ -1,10 +1,10 @@
-"""v14n-4: small-cap intraday underperformance; one entry per session.
+"""v14n-4: natural gas overnight producer hedge pressure; one entry per session.
 Completed-bar stop trigger, next-open execution; gap loss can exceed declaration.
 """
 import numpy as np
 from numba import njit
 
-PARAMS = {'start': 34200, 'end': 54540, 'risk': 250.0, 'size': 1, 'side': -1}
+PARAMS = {'start': 61200, 'end': 30600, 'risk': 250.0, 'size': 1, 'side': -1}
 # Exchange dollar/point specifications, not fitted parameters.
 POINT_VALUE = {'ES': 50, 'MES': 5, 'NQ': 20, 'MNQ': 2, 'YM': 5,
                'MYM': .5, 'RTY': 50, 'M2K': 5, 'NKD': 5,
@@ -54,7 +54,7 @@ if __name__ == '__main__':
     import pandas as pd
     idx = pd.date_range('2020-01-01 23:00', periods=3, freq='min', tz='UTC')
     df = pd.DataFrame({'session': pd.Timestamp('2020-01-02'),
-        'ct_sec': [34200, 34260, 34320], 'close': [100., 100., 100.],
+        'ct_sec': [61200, 61260, 61320], 'close': [100., 100., 100.],
         'low': [100., 100., 100.], 'high': [100., 100., 100.], 'open': [100., 100., 100.], 'contract': 'ESH0'}, index=idx)
     assert signals({'ES': df})['ES'].tolist() == [-1, -1, -1]
     df.index = idx[:2].append(idx[2:] + pd.Timedelta(minutes=1))
